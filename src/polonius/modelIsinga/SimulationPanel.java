@@ -8,6 +8,14 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Jacek Pi³ka
+ *
+ * Panel symulacji: Obliczenia i rysowanie
+ *
+ */
+
 public class SimulationPanel extends JPanel implements Runnable{
 	private static final long serialVersionUID = 1L;
 	
