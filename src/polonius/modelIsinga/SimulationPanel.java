@@ -23,16 +23,21 @@ public class SimulationPanel extends JPanel implements Runnable{
 	int Y=0;
 	int n=0; //Iteracje
 	
+	int advantage=0;
 	int coeff=10;	//Wspó³czynnik skali (im mniej, tym wiêcej punktów na ekranie)
 	int spinNumber=2; //Iloœæ ró¿nych spinów
+	int temp=0; //Temperatura (wspó³czynnik losowoœci samoistnej zmiany spinu)
+	
 	int[][] spins; //Tablica wartoœci spinów
 	
-	public SimulationPanel(int X, int Y, int advantage, int coeff, int spinNumber) { //Konstruktor		
+	public SimulationPanel(int X, int Y, int advantage, int coeff, int spinNumber, int temp) { //Konstruktor		
 		this.X=Math.round(X/coeff+10);
 		this.Y=Math.round(Y/coeff+10);
 		spins=new int[this.X][this.Y];
+		this.advantage=advantage;
 		this.coeff=coeff;
 		this.spinNumber=spinNumber;
+		this.temp=temp;
 		
 		for (int i=0; i<this.X; i++) {	//Przydzielanie losowo pocz¹tkowych spinów
 			for (int j=0; j<this.Y; j++) {
@@ -50,6 +55,7 @@ public class SimulationPanel extends JPanel implements Runnable{
 				//spins[i][j]=(int) Math.round(spinNumber*Math.random()-0.5+((double)advantage)/100); //<- Mo¿na i tak
 			}
 		}
+		System.out.println("Start symulacji");
 	}
 	
 	void changeOpinion() { //Wyznaczanie mo¿liwej zmiany wartoœci spinów
@@ -78,6 +84,8 @@ public class SimulationPanel extends JPanel implements Runnable{
 						spins[i][j]=ii;	//Zmiana spinu (koloru) punktu
 					}
 				}
+				if(1000*Math.random()<temp) //Losowo zmieñ spin (wp³yw temperatury)
+					spins[i][j]=(int) Math.round(spinNumber*Math.random()-0.5+((double)advantage)/100);
 			}
 		}
 		spins=tmp;	//Aktualizacja

@@ -50,6 +50,7 @@ public class Window extends JFrame {
 		JTextField coeff = new JTextField("10");
 		Integer spinNumber[]= {2,3,4,5};
 		JComboBox<Integer> spins = new JComboBox<>(spinNumber);
+		JTextField temp = new JTextField("0");
 		
 		options.setLayout(new GridLayout(25,1));	//Wstawianie powy¿szego do panelu
 		options.add(new JPanel());
@@ -64,12 +65,14 @@ public class Window extends JFrame {
 		options.add(coeff);
 		options.add(new JLabel("Spiny"));
 		options.add(spins);
+		options.add(new JLabel("Temperatura"));
+		options.add(temp);
 		options.add(new JPanel());
 		options.add(new JLabel("by Jacek Pi³ka"));
 		
 		//Tworzenie obiektu symulacyjnego
 		simulationPanel = new SimulationPanel(X,Y,Integer.parseInt(advantage.getText()),Integer.parseInt(coeff.getText()),
-				(Integer) spins.getSelectedItem());
+				(Integer) spins.getSelectedItem(),Integer.parseInt(temp.getText()));
 		add(BorderLayout.CENTER, simulationPanel);	//Dodanie go do panelu g³ównego
 		this.pack();
 		
@@ -77,7 +80,7 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				start.setEnabled(false);	//Wy³¹czenie przycisku startu
 				simulationPanel = new SimulationPanel(X,Y,Integer.parseInt(advantage.getText()),Integer.parseInt(coeff.getText()),
-						(Integer) spins.getSelectedItem());	//Utworzenie obiektu symulacyjnego
+						(Integer) spins.getSelectedItem(),Integer.parseInt(temp.getText()));	//Utworzenie obiektu symulacyjnego
 				add(BorderLayout.CENTER, simulationPanel);	//Dodanie go do panelu g³ównego
 				pack();
 				SwingUtilities.invokeLater(new Runnable() {	//W³¹czenie schedulera (symulacji)
